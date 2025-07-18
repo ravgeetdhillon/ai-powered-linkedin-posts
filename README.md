@@ -1,0 +1,1 @@
+[![Weekly AI-Powered Posts](https://github.com/ravgeetdhillon/ai-powered-linkedin-posts/actions/workflows/weekly-ai-posts.yml/badge.svg)](https://github.com/ravgeetdhillon/ai-powered-linkedin-posts/actions/workflows/weekly-ai-posts.yml)
