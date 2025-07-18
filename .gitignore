@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Environment
+.env
+.env.*
+
+# Logs
+*.log
+logs/
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Notion/Secrets
+notion_secrets.json
+
+# Misc
+*.sqlite3
+*.db
+
+# Node
+node_modules/
+
+# Others
+*.bak
+*.tmp
+
+venv/
