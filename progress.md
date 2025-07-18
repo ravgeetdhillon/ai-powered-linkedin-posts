@@ -9,3 +9,5 @@
 - Added code to summarize weekly GitHub activity for AI input.
 - Added notebook section and code to generate 5 marketing posts using OpenAI GPT based on the weekly summary.
 - Added notebook section and code to save generated posts to Notion database using Notion API.
+- Added module-level documentation and detailed function docstrings to src/main.py for clarity and maintainability.
+- Enhanced Notion post formatting to include both brief and generated post content.
