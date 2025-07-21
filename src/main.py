@@ -254,6 +254,7 @@ def add_post_to_notion(title, topic, date):
             "Due Date": {"date": {"start": date}},
             "Status": {"select": {"name": "To Do"}},
             "Type": {"select": {"name": "Marketing"}},
+            "Tags": {"multi_select": ["name": "LinkedIn"]},
         },
         "children": [
             {
