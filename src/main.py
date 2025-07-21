@@ -224,12 +224,12 @@ Brief:
     return response.choices[0].message.content
     
 
-def add_post_to_notion(title, topic, date):
+def add_post_to_notion(title, content, date):
     """
     Adds a post to a Notion database as a new page.
     Args:
-        post (dict): A dictionary containing post details, including 'heading' and 'body'.
-        topic (str): The topic or main content of the post.
+        title (str): The title for the post.
+        content (str): The topic or main content of the post.
         date (str): The due date for the post in ISO format (YYYY-MM-DD).
     Returns:
         None
@@ -268,7 +268,7 @@ def add_post_to_notion(title, topic, date):
     }
     response = requests.post(url, headers=headers, data=json.dumps(data))
     if response.status_code == 200:
-        print(f"Post '{post['heading']}' added to Notion for {date}.")
+        print(f"Post '{title}' added to Notion for {date}.")
     else:
         print(f"Failed to add post for {date}: {response.text}")
 
@@ -286,7 +286,7 @@ def main():
     today = datetime.today()
     for i, topic in enumerate(marketing_posts_topics):
         post_content = generate_linkedin_post(topic["body"])
-        title = enhance_title_with_emoji(post["heading"])
+        post_title = enhance_title_with_emoji(topic["heading"])
         post_date = (today + timedelta(days=i)).strftime('%Y-%m-%d')
         
         print(f"Topic {i+1}:")
@@ -294,7 +294,7 @@ def main():
         print(post_content)
         print(post_date)
         
-        add_post_to_notion(title, post_content, post_date)
+        add_post_to_notion(post_title, post_content, post_date)
 
 if __name__ == "__main__":
     main()
