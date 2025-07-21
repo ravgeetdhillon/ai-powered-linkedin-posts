@@ -80,18 +80,8 @@ Last week:
 
 project-root/
 ├── src/
-│ ├── github_fetcher.py # Fetch GitHub activity
-│ ├── summarizer.py # Summarize weekly work
-│ ├── ai_generator.py # Generate content using AI
-│ ├── notion_uploader.py # Push posts to Notion
 │ └── main.py # Combine all steps
-├── tests/
-│ ├── test_github_fetcher.py
-│ ├── test_summarizer.py
-│ ├── test_ai_generator.py
-│ ├── test_notion_uploader.py
 ├── requirements.txt # Dependencies
-├── requirements.md # This file
 └── README.md
 
 ```
@@ -102,8 +92,6 @@ project-root/
 
 - Auto-post to Twitter & LinkedIn via their APIs
 - Add images/code snippets in posts
-- Add web UI for post review before publishing
-- Support multiple GitHub users
 
 ---
 
