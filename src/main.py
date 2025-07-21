@@ -214,7 +214,7 @@ Notes:
 - Donot wrap the response in any other text or markdown or code blocks.
 
 Brief:
-{brief}
+{title}
 """
     response = openai.chat.completions.create(
         model="gpt-4.1",
