@@ -245,7 +245,7 @@ def add_post_to_notion(title, content, date):
         "Notion-Version": "2022-06-28"
     }
     
-    content = f"Post:\n\n{topic}"
+    final_content = f"{title}\n\n{content}"
     
     data = {
         "parent": {"database_id": NOTION_DATABASE_ID},
@@ -261,7 +261,7 @@ def add_post_to_notion(title, content, date):
                 "object": "block",
                 "type": "paragraph",
                 "paragraph": {
-                    "rich_text": [{"type": "text", "text": {"content": content}}]
+                    "rich_text": [{"type": "text", "text": {"content": final_content}}]
                 }
             }
         ]
