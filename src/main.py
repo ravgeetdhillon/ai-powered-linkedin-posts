@@ -146,8 +146,6 @@ def generate_linkedin_post_ideas(summary):
     """
     
     prompt = f"""
-You are a social media marketer.
-
 Task:
 - List 5 unique topics that I worked on that can be turned into LinkedIn posts based on the following weekly GitHub activity summary.
 
@@ -162,7 +160,7 @@ Summary:
 """
     response = openai.chat.completions.create(
         model="gpt-4.1",
-        messages=[{"role": "system", "content": "You are a helpful assistant."},
+        messages=[{"role": "system", "content": "You are a social media marketer."},
                   {"role": "user", "content": prompt}],
     )
     return response.choices[0].message.content
@@ -180,8 +178,6 @@ def generate_linkedin_post(brief):
     """
     
     prompt = f"""
-You are a social media marketer and a good story writer who has good technical and coding knowledge.
-
 Your tasks:
 - Based on the following brief, create a LinkedIn post.
 - Make it personal and add story-telling. 
@@ -192,20 +188,43 @@ Notes:
 - Be free to add emojis and very tiny bit of humor if relevant.
 - Only provide the post body without any markdown.
 - Donot wrap the JSON response in any other text or markdown or code blocks.
-- Keep the lanaguage simple, professional yet engaging.
+- Keep the language simple, professional yet engaging.
 
 Brief:
 {brief}
 """
     response = openai.chat.completions.create(
         model="gpt-4.1",
-        messages=[{"role": "system", "content": "You are a helpful assistant."},
+        messages=[{"role": "system", "content": "You are a social media marketer and a good story writer who has good technical and coding knowledge."},
                   {"role": "user", "content": prompt}],
     )
     return response.choices[0].message.content
 
 
-def add_post_to_notion(post, topic,  date):
+def enhance_title_with_emoji(title):
+    prompt = f"""
+You are a social media marketer who has good knowledge about emojis.
+
+Your tasks:
+- For the following title, add one emoji that is relevant to it.
+- Return the title with the emoji, nothing else.
+
+Notes:
+- Only and only add one emoji
+- Donot wrap the response in any other text or markdown or code blocks.
+
+Brief:
+{brief}
+"""
+    response = openai.chat.completions.create(
+        model="gpt-4.1",
+        messages=[{"role": "system", "content": "You are a social media marketer who has good knowledge about emojis."},
+                  {"role": "user", "content": prompt}],
+    )
+    return response.choices[0].message.content
+    
+
+def add_post_to_notion(title, topic, date):
     """
     Adds a post to a Notion database as a new page.
     Args:
@@ -226,12 +245,12 @@ def add_post_to_notion(post, topic,  date):
         "Notion-Version": "2022-06-28"
     }
     
-    content = f"Brief:\n\n{post['body']}\n\n---\n\nPost:\n\n{topic}"
+    content = f"Post:\n\n{topic}"
     
     data = {
         "parent": {"database_id": NOTION_DATABASE_ID},
         "properties": {
-            "Title": {"title": [{"text": {"content": post["heading"]}}]},
+            "Title": {"title": [{"text": {"content": title}}]},
             "Due Date": {"date": {"start": date}},
             "Status": {"select": {"name": "To Do"}},
             "Type": {"select": {"name": "Marketing"}},
@@ -265,15 +284,16 @@ def main():
         return
     today = datetime.today()
     for i, topic in enumerate(marketing_posts_topics):
-        post = generate_linkedin_post(topic["body"])
+        post_content = generate_linkedin_post(topic["body"])
+        title = enhance_title_with_emoji(post["heading"])
         post_date = (today + timedelta(days=i)).strftime('%Y-%m-%d')
         
         print(f"Topic {i+1}:")
         print(topic)
-        print(post)
+        print(post_content)
         print(post_date)
         
-        add_post_to_notion(topic, post, post_date)
+        add_post_to_notion(title, post_content, post_date)
 
 if __name__ == "__main__":
     main()
