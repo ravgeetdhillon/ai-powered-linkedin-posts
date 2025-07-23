@@ -181,7 +181,9 @@ def generate_linkedin_post(brief):
 Your tasks:
 - Based on the following brief, create a LinkedIn post.
 - Make it personal and add story-telling. 
-- Also, add reasons supporting why would I have done this.
+- Also, add reasons supporting why such a thing could have been done.
+- Remove the "I did this" tone and make it more like an insightful, value-packed post that educates readers and sparks engagement, without being self-promotional.
+- At the end of the post, add a few relevant hashtags for LinkedIn platform.
 
 Notes:
 - Always write in first person and write like a human not like a bot
